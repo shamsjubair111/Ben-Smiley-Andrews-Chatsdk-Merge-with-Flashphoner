@@ -16,8 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 
 import androidx.annotation.LayoutRes;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +42,8 @@ import sdk.chat.core.types.ConnectionType;
 import sdk.chat.core.types.SearchActivityType;
 import sdk.chat.core.utils.UserListItemConverter;
 import sdk.chat.ui.ChatSDKUI;
+import sdk.chat.ui.Contact;
+import sdk.chat.ui.ContactListViewAdapter;
 import sdk.chat.ui.R;
 import sdk.chat.ui.adapters.UsersListAdapter;
 import sdk.chat.ui.interfaces.SearchSupported;
@@ -65,7 +69,9 @@ public class ContactsFragment extends BaseFragment implements SearchSupported {
     protected List<User> sourceUsers = new ArrayList<>();
 
     protected RecyclerView recyclerView;
-    protected FrameLayout root;
+    protected ConstraintLayout root;
+    public ContactListViewAdapter adapter1;
+    public ListView listViewId;
 
     @Override
     protected @LayoutRes int getLayout() {
@@ -77,6 +83,7 @@ public class ContactsFragment extends BaseFragment implements SearchSupported {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.recyclerView);
+        listViewId = view.findViewById(R.id.listViewId);
         root = view.findViewById(R.id.root);
 
         initViews();
@@ -154,8 +161,27 @@ public class ContactsFragment extends BaseFragment implements SearchSupported {
         // override the adapter given from the extended class with setAdapter.
         adapter = new UsersListAdapter();
 
+        ArrayList<Contact> callTestUsers = new ArrayList<>();
+        Contact jubair = new Contact("Jubair","8801833023200");
+        Contact appleVai = new Contact("Apple Vai","8801743801850");
+        Contact avijitDa = new Contact("Avijit Da","8801730330021");
+        Contact marufVai = new Contact("Maruf Vai","8801932383889");
+        Contact mustafaVai = new Contact("Mustafa Vai","8801754105098");
+        callTestUsers.add(jubair);
+        callTestUsers.add(appleVai);
+        callTestUsers.add(avijitDa);
+        callTestUsers.add(marufVai);
+        callTestUsers.add(mustafaVai);
+
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
+
+
+        adapter1 = new ContactListViewAdapter(getActivity(),callTestUsers);
+
+        listViewId.setAdapter(adapter1);
     }
 
     @Override

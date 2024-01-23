@@ -104,6 +104,7 @@ dependencies {
 
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation files('/home/jubair/Downloads/deps/wcs-android-sdk-1.1.0.61.aar')
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
